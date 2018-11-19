@@ -1,0 +1,186 @@
+<!DOCUMENT html>
+<html lang="en" class="bg-green">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>"Hovatovább?" nap</title>
+  <link href="sandbox.css" rel="stylesheet">
+  <link href="./dist/css/drawer.css" rel="stylesheet">
+</head>
+<body class="drawer drawer--left" onload="nyitCsuk();">
+    <script>
+function nyitCsuk() {
+    $('.drawer').drawer('open');
+    setTimeout(function(){ $('.drawer').drawer('close'); }, 500);
+}
+</script>
+
+  <header role="banner">
+    <button type="button" class="drawer-toggle drawer-hamburger">
+      <span class="sr-only">Kezdőlap</span>
+      <span class="drawer-hamburger-icon"></span>
+    </button>
+
+    <nav class="drawer-nav" role="navigation">
+        <ul class="drawer-menu">
+          <li><a class="drawer-menu-item" href="index.html">Kezdőlap</a></li>
+          <li><a class="drawer-menu-item" href="borze.html">Börze</a></li>
+          <!--<li><a class="drawer-menu-item" href="muhely.html">Műhely</a></li>-->
+          <li class="drawer-dropdown">
+            <a class="drawer-menu-item" data-target="#" href="muhely.html" data-toggle="dropdown" role="button" aria-expanded="false">
+              Műhely<span class="drawer-caret"></span>
+            </a>
+            <ul class="drawer-dropdown-menu">
+              <li><a class="drawer-dropdown-menu-item" href="muhely.html#muhelyprogramok">Műhelyprogramok</a></li>
+              <li><a class="drawer-dropdown-menu-item" href="muhely.html#kari_bemutatkozasok">PTE Kari bemutatkozások</a></li>
+            </ul>
+          </li>
+          <li class="drawer-dropdown">
+            <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+              Fórum<span class="drawer-caret"></span>
+            </a>
+            <ul class="drawer-dropdown-menu">
+              <li><a class="drawer-dropdown-menu-item" href="forum.html#elso">Első rész</a></li>
+              <li><a class="drawer-dropdown-menu-item" href="forum.html#masodik">Második rész</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+  </header>
+
+  <!-- content -->
+  <main role="main">
+    <section class="item">
+			<script>
+				function betolt() {
+					var GLM={DOM:Object,AJAX:Object,Collection:Object};GLM.DOM.isInternetExplorer=(navigator.userAgent.indexOf("MSIE")>=0);GLM.DOM.isMozilla=(navigator.userAgent.indexOf("Gecko")>=0);GLM.DOM.isOpera=(navigator.userAgent.indexOf("Opera")>=0);GLM.DOM.isSafari=(navigator.userAgent.indexOf("Safari")>=0);GLM.Collection.Map=function(){var len=0;var keys=new Array();var values=new Array();this.get=function(key){var val=null;for(var i=0;i<len;i++){if(keys[i]==key){val=values[i];break;}}return val;};this.put=function(key,value){for(var i=0;i<len;i++){if(keys[i]==key){values[i]=value;return;}}keys[len]=key;values[len++]=value;};this.length=function(){return len;};this.contains=function(key){var con=false;for(var i=0;i<len;i++){if(keys[i]==key){con=true;break;}}return con;};this.remove=function(key){var keyArr=new Array();var valArr=new Array();var l=0;for(var i=0;i<len;i++){if(keys[i]!=key){keyArr[l]=keys[i];valArr[l++]=values[i];}}keys=keyArr;values=valArr;len=l;};};;GLM.AJAX=function(){var nameSpace="http://tempuri.org/";var map=new GLM.Collection.Map();var ajaxObject=function(){try{return new XMLHttpRequest();}catch(ex){};try{return new ActiveXObject("Microsoft.XMLHTTP");}catch(ex){};try{return new SOAPCall();}catch(ex){};};;;this.onError=function(error){alert(error);};;this.callPage=function(url,callbackFunction,method,args,async){try{var ao=ajaxObject();ao.onreadystatechange=function(){if(ao.readyState==4||ao.readyState=="complete"){callbackFunction(ao.responseText);}};if(!method)method="GET";if(!args)args=null;if(async==null)async=true;ao.open(method,url,async);if(method=="POST")ao.setRequestHeader("Content-Type","application/x-www-form-urlencoded");ao.send(args);}catch(ex){this.onError(ex);}};;this.callService=function(serviceUrl,soapMethod,callbackFunction){var callServiceError=this.onError;var ao=ajaxObject();if(!ao.encode){if(serviceUrl.indexOf("http://")<0)serviceUrl="http://"+serviceUrl;serviceUrl+="?WSDL";var soapEnvelope="<?xml version=\"1.0\" encoding=\"utf-8\"?>";soapEnvelope+="<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">";soapEnvelope+="<soap:Body>";soapEnvelope+="<"+soapMethod+" xmlns=\""+nameSpace+"\">";if(arguments.length>3){for(var i=3;i<arguments.length;i++){var params=arguments[i].split("=");soapEnvelope+="<"+params[0]+">";soapEnvelope+=params[1];soapEnvelope+="</"+params[0]+">";}}soapEnvelope+="</"+soapMethod+">";soapEnvelope+="</soap:Body>";soapEnvelope+="</soap:Envelope>";ao.onreadystatechange=function(){if(ao.readyState==4){try{var response=ao.responseXML.getElementsByTagName(soapMethod+"Result")[0];if(!response)response=ao.responseXML.getElementsByTagName(soapMethod+"Response")[0];if(!response){callServiceError("WebService does not contain a Result/Response node");return;}if(response.textContent)callbackFunction(response.textContent);else if(response.text)callbackFunction(response.text);}catch(ex){callServiceError(ex);}}};ao.open("POST",serviceUrl,true);ao.setRequestHeader("Content-Type","text/xml");ao.setRequestHeader("SOAPAction",nameSpace+soapMethod);try{ao.send(soapEnvelope);}catch(ex){serviceCallError(ex);}}else{var soapParams=new Array();var headers=new Array();var soapVersion=0;var object=nameSpace;if(serviceUrl.indexOf("http://")<0)serviceUrl=document.location+serviceUrl;ao.transportURI=serviceUrl;ao.actionURI=nameSpace+soapMethod;for(var i=3;i<arguments.length;i++){var params=arguments[i].split("=");soapParams.push(new SOAPParameter(params[1],params[0]));}try{ao.encode(soapVersion,soapMethod,object,headers.length,headers,soapParams.length,soapParams);}catch(ex){serviceCallError(ex);}try{netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");}catch(ex){return false;}try{ao.asyncInvoke(function(resp,call,status){if(resp.fault)return callServiceError(resp.fault);if(!resp.body){callServiceError("Service "+call.transportURI+" not found.");}else{try{callbackFunction(resp.body.firstChild.firstChild.firstChild.data);}catch(ex){callServiceError(ex);}}});}catch(ex){serviceCallError(ex);}}};;this.setNameSpace=function(ns){nameSpace=ns;};;this.getNameSpace=function(){return nameSpace;};};
+					var xhttp = new XMLHttpRequest();
+					xhttp.open("GET", "jax.txt", true);
+					xhttp.send();
+					document.getElementById("ir").innerHTML = xhttp.responseText;
+					}
+			</script>
+        <h1>Kezdőlap</h1>
+	  <h2>Üdvözöljük! Kérjük válasszon a menüpontok közül!</h2>
+	  <button onclick=" betolt();">ird ki</button>
+	  <h2 id="ir">q</h2>
+        <button type="button" class="drawer-toggle" style="visibility:hidden;" id="megnyitmenu">Menü megnyitása</button>
+        <script>
+            /*if (window.mobilecheck==True){
+                document.getElementById("megnyitmenu").innerHTML.style.visibility="visible";
+            }*/
+        </script>
+            
+	  <div class="alul">
+        <img src="alul.png" style="width: 90%;text-align: center;">
+	    <!--<img src="oh.png" height=auto style="margin:30px">
+		  <img src="crnlg1.png" height=auto style="margin:30px;">
+	<img src="logo1.png" height=auto style="margin:30px;">-->
+		<h3> Powered by Informatika szakkör</h3>
+  </div>
+    </section>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Bootstrap dropdown v4.0.0-alpha -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script> -->
+  <script src="./dist/js/drawer.min.js" charset="utf-8"></script>
+  <script>
+    $(document).ready(function() {
+      $('.drawer').drawer();
+    });
+  </script>
+
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<html lang="en" class="bg-green">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>"Hovatovább?" nap</title>
+  <link href="sandbox.css" rel="stylesheet">
+  <link href="/dist/css/drawer.css" rel="stylesheet">
+</head>
+<body class="drawer drawer--left drawer--navbarTopGutter" onload="$('.drawer').drawer('toggle');">
+
+  <header class="drawer-navbar drawer-navbar--fixed" role="banner">
+    <div class="drawer-container">
+      <div class="drawer-navbar-header">
+        <a class="drawer-brand">Kezdőlap</a>
+        <button type="button" class="drawer-toggle drawer-hamburger">
+          <span class="sr-only">toggle navigation</span>
+          <span class="drawer-hamburger-icon"></span>
+        </button>
+      </div>
+
+      <nav class="drawer-nav" role="navigation">
+        <ul class="drawer-menu">
+          <li><a class="drawer-menu-item" href="index.html">Kezdőlap</a></li>
+          <li><a class="drawer-menu-item" href="borze.html">Börze</a></li>
+          <li><a class="drawer-menu-item" href="muhely.html">Műhely</a></li>
+          <li class="drawer-dropdown">
+            <a class="drawer-menu-item" data-target="#" href="muhely.html" data-toggle="dropdown" role="button" aria-expanded="false">
+              Műhely<span class="drawer-caret"></span>
+            </a>
+            <ul class="drawer-dropdown-menu">
+              <li><a class="drawer-dropdown-menu-item" href="muhely.html#muhelyprogramok">Műhelyprogramok</a></li>
+              <li><a class="drawer-dropdown-menu-item" href="muhely.html#kari_bemutatkozasok">PTE Kari bemutatkozások</a></li>
+            </ul>
+          </li>
+          <li class="drawer-dropdown">
+            <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
+              Fórum<span class="drawer-caret"></span>
+            </a>
+            <ul class="drawer-dropdown-menu">
+              <li><a class="drawer-dropdown-menu-item" href="forum.html#elso">Első rész</a></li>
+              <li><a class="drawer-dropdown-menu-item" href="forum.html#masodik">Második rész</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  content
+  <main role="main">
+    <section class="item">
+	  <h2>Üdvözöljük! Kérjük válasszon a menüpontok közül!</h2>
+        <button type="button" class="drawer-toggle" style="visibility:hidden;" id="megnyitmenu">Menü megnyitása</button>
+        <script>
+            /*if (window.mobilecheck==True){
+                document.getElementById("megnyitmenu").innerHTML.style.visibility="visible";
+            }*/
+        </script>
+            
+	  <div class="alul">
+        <img src="alul.png" style="width: 90%;text-align: center;">
+	    <img src="oh.png" height=auto style="margin:30px">
+		  <img src="crnlg1.png" height=auto style="margin:30px;">
+	<img src="logo1.png" height=auto style="margin:30px;">
+		<h3> Powered by Informatika szakkör</h3>
+  </div>
+    </section>
+
+
+
+
+  <script src="jquery.min.js"></script><!--https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js
+  <script src="iscroll.js"></script><!--https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.js
+  <script src="bootstrap.min.js"></script><!--https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js
+  <script src="/dist/js/drawer.min.js" charset="utf-8"></script>
+  <script>
+    $(document).ready(function() {
+      $('.drawer').drawer();
+    });
+  </script>
+</body>
+</html>
+
+
+-->
