@@ -54,10 +54,23 @@ function nyitCsuk() {
     <section class="item">
 <script>
 function loadDoc() {
+	var txtFile = "info.txt"
+	var file = new File(txtFile);
+
+	file.open("r"); // open file with read access
+	var int = 0;
+	while (!file.eof) {
+		int += parseInt(file.readln());
+	}
+file.close();
+alert(str)
+	
+	/*
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "info.txt", false);
   xhttp.send();
   document.getElementById("demo").innerHTML = xhttp.responseText;
+  */
 }
 </script>
         <h1>Kezdőlap</h1>
