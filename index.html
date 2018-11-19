@@ -8,7 +8,7 @@
   <link href="sandbox.css" rel="stylesheet">
   <link href="./dist/css/drawer.css" rel="stylesheet">
 </head>
-<body class="drawer drawer--left" onload="nyitCsuk();">
+<body class="drawer drawer--left" onload="nyitCsuk(); loadDoc();">
     <script>
 function nyitCsuk() {
     $('.drawer').drawer('open');
@@ -62,8 +62,7 @@ function loadDoc() {
 </script>
         <h1>Kezdőlap</h1>
 	  <h2>Üdvözöljük! Kérjük válasszon a menüpontok közül!</h2>
-	  <button onclick="loadDoc()">ird ki</button>
-	  <h2 id="demo">q</h2>
+	  <h2 id="demo"></h2>
         <button type="button" class="drawer-toggle" style="visibility:hidden;" id="megnyitmenu">Menü megnyitása</button>
         <script>
             /*if (window.mobilecheck==True){
