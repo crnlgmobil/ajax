@@ -52,18 +52,18 @@ function nyitCsuk() {
   <!-- content -->
   <main role="main">
     <section class="item">
-			<script>
-				function betolt() {
-					var xhttp = new XMLHttpRequest();
-					xhttp.open("GET", "jax.txt", false);
-					xhttp.send();
-					document.getElementById("ir").innerHTML = xhttp.responseText;
-					}
-			</script>
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "info.txt", false);
+  xhttp.send();
+  document.getElementById("demo").innerHTML = xhttp.responseText;
+}
+</script>
         <h1>Kezdőlap</h1>
 	  <h2>Üdvözöljük! Kérjük válasszon a menüpontok közül!</h2>
-	  <button onclick=" betolt();">ird ki</button>
-	  <h2 id="ir">q</h2>
+	  <button onclick="loadDoc()">ird ki</button>
+	  <h2 id="demo">q</h2>
         <button type="button" class="drawer-toggle" style="visibility:hidden;" id="megnyitmenu">Menü megnyitása</button>
         <script>
             /*if (window.mobilecheck==True){
