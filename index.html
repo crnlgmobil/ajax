@@ -54,8 +54,7 @@ function nyitCsuk() {
     <section class="item">
 <script>
 function loadDoc() {
-	var txtFile = "c:/info.txt"
-	var file = new File(txtFile);
+	var file = new File("info.txt");
 
 	file.open("r"); // open file with read access
 	var int = 0;
@@ -63,7 +62,7 @@ function loadDoc() {
 		int += parseInt(file.readln());
 	}
 file.close();
-alert(str)
+alert(int)
 	
 	/*
   var xhttp = new XMLHttpRequest();
